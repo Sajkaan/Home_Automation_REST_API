@@ -1,19 +1,32 @@
 package com.sajkaan.device;
 
 import com.sajkaan.control.Control;
+import com.sajkaan.core.BaseEntity;
 import com.sajkaan.room.Room;
 
+import javax.persistence.CascadeType;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import java.util.ArrayList;
 import java.util.List;
 
-public class Device {
+public class Device extends BaseEntity{
     private String name;
+
     @ManyToOne
     private Room room;
 
+    @OneToMany(mappedBy = "device", cascade = CascadeType.ALL)
     private List<Control> controls;
 
-    public Device() {
+    protected Device() {
+        super();
+        controls = new ArrayList<>();
+    }
+
+    public Device(String name) {
+        this();
+        this.name = name;
     }
 
     public String getName() {
@@ -36,7 +49,9 @@ public class Device {
         return controls;
     }
 
-    public void setControls(List<Control> controls) {
-        this.controls = controls;
+
+    public void addControl(Control control) {
+        control.setDevice(this);
+        controls.add(control);
     }
 }
