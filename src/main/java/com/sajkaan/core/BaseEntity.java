@@ -10,5 +10,5 @@ public abstract class BaseEntity {
     @Version
     private Long version;
 
-    protected BaseEntity({id = null;})
+    protected BaseEntity() {id = null;}
 }
