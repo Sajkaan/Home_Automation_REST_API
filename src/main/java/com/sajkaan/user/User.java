@@ -6,61 +6,42 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.Entity;
+import javax.validation.constraints.NotNull;
+import java.util.Arrays;
+import java.util.List;
 
 @Entity
 public class User extends BaseEntity {
 
     public static final PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
-    private String firstName;
-    private String lastName;
-    private String username;
-    @JsonIgnore
-    private String password;
+    @NotNull
+    private String name;
     @JsonIgnore
     private String[] roles;
+    @JsonIgnore
+    private String password;
 
     protected User() {
         super();
     }
 
-    public User(String firstName, String lastName, String username, String password, String[] roles) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.username = username;
-        setPassword(password);
+    public User(String name, String[] roles, String password) {
+        this();
+        this.name = name;
         this.roles = roles;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
+        setPassword(password);
     }
 
     public void setPassword(String password) {
         this.password = PASSWORD_ENCODER.encode(password);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String[] getRoles() {
@@ -69,5 +50,14 @@ public class User extends BaseEntity {
 
     public void setRoles(String[] roles) {
         this.roles = roles;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public boolean hasAdminRole() {
+        List<String> roles = Arrays.asList(getRoles());
+        return roles.contains("ROLE_ADMIN");
     }
 }

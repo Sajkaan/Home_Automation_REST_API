@@ -4,30 +4,28 @@ import com.sajkaan.core.BaseEntity;
 import com.sajkaan.device.Device;
 import com.sajkaan.user.User;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
 @Entity
 public class Control extends BaseEntity{
     private String name;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     private Device device;
 
     private int value;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     private User lastModifiedBy;
 
     protected Control() {
         super();
     }
 
-    public Control(String name, Device device, int value, User lastModifiedBy) {
+    public Control(String name) {
         this();
         this.name = name;
-        this.device = device;
-        this.value = value;
-        this.lastModifiedBy = lastModifiedBy;
     }
 
     public String getName() {

@@ -6,6 +6,7 @@ import com.sajkaan.user.User;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -17,6 +18,26 @@ public class Room extends BaseEntity{
 
     List<User> administrators;
 
+    protected Room(){
+        super();
+        devices = new ArrayList<>();
+        administrators = new ArrayList<>();
+    }
+
+    public Room(String name, Integer area) {
+        this();
+        this.name = name;
+        this.area = area;
+    }
+
+    public void addAdministrator(User administrator) {
+        administrators.add(administrator);
+    }
+
+    public void addDevice(Device device) {
+        device.setRoom(this);
+        devices.add(device);
+    }
 
     public String getName() {
         return name;
