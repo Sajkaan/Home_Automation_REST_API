@@ -18,7 +18,7 @@ public class ControlEventHandler {
     @HandleAfterSave
     public void setLastModifiedAfterSave(Control control) {
         String name = SecurityContextHolder.getContext().getAuthentication().getName();
-        User user = users.findByUsername(name);
+        User user = users.findByName(name);
         control.setLastModifiedBy(user);
     }
 }

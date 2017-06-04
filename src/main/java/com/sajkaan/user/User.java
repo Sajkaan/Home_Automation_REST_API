@@ -12,7 +12,6 @@ import java.util.List;
 
 @Entity
 public class User extends BaseEntity {
-
     public static final PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
     @NotNull
     private String name;

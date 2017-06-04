@@ -13,9 +13,7 @@ public class Control extends BaseEntity{
     private String name;
     @ManyToOne(cascade = CascadeType.MERGE)
     private Device device;
-
     private int value;
-
     @ManyToOne(cascade = CascadeType.MERGE)
     private User lastModifiedBy;
 

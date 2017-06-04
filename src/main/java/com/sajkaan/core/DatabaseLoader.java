@@ -1,5 +1,7 @@
-package com.sajkaan.control;
+package com.sajkaan.core;
 
+import com.sajkaan.control.Control;
+import com.sajkaan.control.ControlRepository;
 import com.sajkaan.device.Device;
 import com.sajkaan.device.DeviceRepository;
 import com.sajkaan.room.Room;
@@ -18,7 +20,6 @@ import java.util.stream.IntStream;
 
 @Component
 public class DatabaseLoader implements ApplicationRunner {
-
     private final RoomRepository rooms;
     private final DeviceRepository devices;
     private final ControlRepository controls;
@@ -37,12 +38,16 @@ public class DatabaseLoader implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         List<User> userList = Arrays.asList(
-                new User("Son Goku", new String[] {"ROLE_ADMIN"}, "goku"),
-                new User("Vegata", new String[] {"ROLE_USER"}, "password"),
-                new User("Gohan", new String[] {"ROLE_USER"}, "password"),
-                new User("Piccolo", new String[] {"ROLE_USER"}, "password"),
-                new User("Tien", new String[] {"ROLE_USER"}, "password"),
-                new User("Frieza", new String[] {"ROLE_USER"}, "password")
+                new User("Barbara Ann Minerva", new String[] {"ROLE_USER"}, "password"),
+                new User("Wade Wilson", new String[] {"ROLE_USER"}, "password"),
+                new User("Floyd Lawton", new String[] {"ROLE_USER"}, "password"),
+                new User("Barry Allen", new String[] {"ROLE_USER", "ROLE_ADMIN"}, "password"),
+                new User("Eobard Thawn", new String[] {"ROLE_USER"}, "password"),
+                new User("Thomas Wayne", new String[] {"ROLE_USER"}, "password"),
+                new User("Diana Prince", new String[] {"ROLE_USER", "ROLE_ADMIN"}, "password"),
+                new User("Donna Troy", new String[] {"ROLE_USER"}, "password"),
+                new User("Barbara Gordon", new String[] {"ROLE_USER", "ROLE_ADMIN"}, "password"),
+                new User("Steve Rogers", new String[] {"ROLE_USER"}, "password")
         );
         users.save(userList);
 

@@ -12,13 +12,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Device extends BaseEntity{
+public class Device extends BaseEntity {
     private String name;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Room room;
 
-    @OneToMany(mappedBy = "device", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Control> controls;
 
     protected Device() {
@@ -29,6 +29,11 @@ public class Device extends BaseEntity{
     public Device(String name) {
         this();
         this.name = name;
+    }
+
+    public void addControl(Control control) {
+        control.setDevice(this);
+        controls.add(control);
     }
 
     public String getName() {
@@ -51,9 +56,4 @@ public class Device extends BaseEntity{
         return controls;
     }
 
-
-    public void addControl(Control control) {
-        control.setDevice(this);
-        controls.add(control);
-    }
 }
